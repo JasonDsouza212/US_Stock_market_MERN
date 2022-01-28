@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.Homepage {
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    .Contentpage {
+        width: stretch;
+        height: 100vh;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Homepage {
+        .Contentpage {
+            height: -webkit-calc(100% - 60px);
+            height: -moz-calc(100% - 60px);
+            height: calc(100vh - 60px);
+        }
+    }
+}

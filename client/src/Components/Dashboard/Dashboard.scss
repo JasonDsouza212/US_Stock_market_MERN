@@ -1,0 +1,336 @@
+%CardBeforeHeader {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    font-size: 1.25em;
+    margin: 16px 16px;
+    font-weight: bold;
+}
+
+.Contentpage {
+    .Dashboard {
+        display: grid;
+        margin: 2%;
+        column-gap: 2%;
+        row-gap: 2%;
+
+        grid-template-columns: 49% 49%;
+        grid-template-areas:
+            "AccountInfo  PortfolioChart"
+            "PNLChart PNLChart"
+            "Portfolio Portfolio"
+            "Transactions Transactions";
+
+        .AccountInfo {
+            grid-area: AccountInfo;
+            place-self: stretch;
+            .Card {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .Header {
+                    margin-top: 0;
+                    font-size: calc(1.75rem + 0.4vw);
+                    &::after {
+                        content: "Here's Your Portfolio Performance 👇";
+                        display: block;
+                        color: gray;
+                        margin: 8px 0px;
+                        position: relative;
+                        font-size: calc(1rem + 0.2vw);
+                    }
+                }
+                .JoinDate {
+                    span {
+                        font-size: calc(2rem + 0.2vw);
+                        padding: 0px 0.5%;
+                    }
+                }
+                .StatContainer {
+                    margin: 8px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    .Up {
+                        color: green;
+                    }
+                    .Down {
+                        color: red;
+                    }
+                    .PortfolioValue {
+                        font-size: calc(1.75rem + 0.2vw);
+                        &::before {
+                            content: "Portfolio Value📈";
+                            display: block;
+                            color: gray;
+                            position: relative;
+                            margin: 8px 0px;
+                        }
+                    }
+                    .TotalReturn {
+                        font-size: calc(1.25rem + 0.2vw);
+                        &::before {
+                            content: "Total Return💵";
+                            display: block;
+                            color: gray;
+                            position: relative;
+                            margin: 8px 0px;
+                        }
+                    }
+                }
+            }
+        }
+        .PortfolioChart {
+            grid-area: PortfolioChart;
+            place-self: stretch;
+            .Card {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                position: relative;
+
+                .InfoContainer {
+                    &::before {
+                        content: "Account Detail";
+                        @extend %CardBeforeHeader;
+                    }
+                    .CashValue {
+                        font-size: calc(0.75rem + 0.5vw);
+                        &::before {
+                            content: "Cash Value";
+                            display: block;
+                            color: gray;
+
+                            text-decoration-line: underline;
+                            margin: 8px 0px;
+                        }
+                    }
+                    .TotalStockValue {
+                        font-size: calc(0.75rem + 0.5vw);
+                        &::before {
+                            content: "Total Stock Value";
+                            display: block;
+                            color: gray;
+                            text-decoration-line: underline;
+                            margin: 8px 0px;
+                        }
+                    }
+                }
+            }
+        }
+        .PNLChart {
+            grid-area: PNLChart;
+            place-self: stretch;
+            .Header {
+                margin: 16px;
+                font-weight: bold;
+                font-size: calc(1.5rem + 0.1vw);
+            }
+            .Card {
+                min-height: 40vh;
+                height: calc(100% - 32px - (1.5rem + 0.1vw));
+                position: relative;
+                display: flex;
+                justify-content: center;
+                div {
+                    .xAxis {
+                        path {
+                            display: none;
+                        }
+                        text {
+                            font-size: calc(0.1rem + 1vw);
+                            color: rgba(black, 0.85);
+                        }
+                    }
+                    .yAxis {
+                        path {
+                            display: none;
+                        }
+                        text {
+                            font-size: calc(0.3rem + 0.75vw);
+                            color: rgba(black, 0.85);
+                        }
+                    }
+                }
+            }
+        }
+
+        .Portfolio {
+            grid-area: Portfolio;
+            place-self: stretch;
+
+            .Header {
+                margin: 16px;
+                font-weight: bold;
+                font-size: calc(1.5rem + 0.1vw);
+            }
+            .Card {
+                position: relative;
+                overflow-x: auto;
+
+                .PortfolioTable {
+                    border-collapse: collapse;
+                    width: 100%;
+                    text-align: center;
+                    overflow-y: scroll;
+
+                    tr {
+                        border-bottom: 0.1px solid gray;
+                    }
+                    th {
+                        color: gray;
+                        padding: 1% 0%;
+                    }
+                    td {
+                        padding: 2% 0%;
+                        font-weight: bold;
+
+                        &.Up {
+                            color: green;
+                        }
+                        &.Down {
+                            color: red;
+                        }
+                        &.Symbol {
+                            cursor: pointer;
+                            color: lightseagreen;
+                        }
+                        &::after {
+                            content: " ";
+                            display: block;
+                            position: relative;
+                            width: 100%;
+                            height: 1px;
+                            color: gray;
+                        }
+                    }
+                }
+            }
+        }
+        .Transactions {
+            grid-area: Transactions;
+            place-self: stretch;
+            .Header {
+                margin: 16px;
+                font-weight: bold;
+                font-size: calc(1.5rem + 0.1vw);
+            }
+            .Card {
+                position: relative;
+                max-height: 50vh;
+                overflow-y: scroll;
+                padding-top: 0;
+                margin-bottom: 2%;
+                .TransactionsTable {
+                    width: 100%;
+                    text-align: center;
+                    border-collapse: collapse;
+                    .Up {
+                        color: green;
+                    }
+                    .Down {
+                        color: red;
+                    }
+                    th {
+                        color: gray;
+                        padding: 3% 0% 1% 0%;
+                        position: sticky;
+                        top: 0;
+                        background-color: white;
+                        border-bottom: 0.1px solid gray;
+                    }
+                    td {
+                        padding: 2% 0%;
+                        font-weight: bold;
+                        border-bottom: 0.1px solid gray;
+                        &.Symbol {
+                            cursor: pointer;
+                            color: lightseagreen;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .PortfolioChart {
+        .Card {
+            flex-direction: column;
+        }
+    }
+}
+@media only screen and (max-width: 900px) {
+    .Contentpage {
+        .Dashboard {
+            display: flex;
+            flex-direction: column;
+            .AccountInfo {
+                margin-bottom: 5%;
+            }
+            .PortfolioChart {
+                .Card {
+                    min-height: 400px;
+                    flex-direction: row;
+                }
+            }
+
+            .PNLChart {
+                .Card {
+                    div {
+                        .xAxis {
+                            path,
+                            text,
+                            .tick {
+                                display: none;
+                            }
+                        }
+                        .yAxis {
+                            text {
+                                font-size: calc(0.5rem + 0.85vw);
+                                color: rgba(black, 0.85);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .StatContainer {
+        flex-direction: column !important;
+        .TotalReturn {
+            font-size: calc(1.75rem + 0.2vw) !important;
+        }
+    }
+    .Portfolio {
+        .Card {
+            font-size: calc(0.75rem) !important;
+            .PortfolioTable {
+                .CompanyName,
+                .AverageCost,
+                .MarketValue,
+                .PortfolioDiversity {
+                    display: none;
+                }
+            }
+        }
+    }
+    .Transactions {
+        .Card {
+            font-size: calc(0.75rem) !important;
+            .TransactionsTable {
+                .TotalAmount,
+                .AveragePricePerShare {
+                    display: none;
+                }
+            }
+        }
+    }
+}

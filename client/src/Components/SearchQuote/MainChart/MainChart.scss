@@ -1,0 +1,221 @@
+%ColumnNav {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin: 0;
+    color: gray;
+    .Options {
+        cursor: pointer;
+        &.Current {
+            color: #0f75b4;
+            font-weight: bold;
+            &::after {
+                content: "";
+                display: block;
+                position: relative;
+                border-bottom: 2px solid #0f75b4;
+                bottom: -0.25em;
+            }
+        }
+    }
+}
+
+.MainChart {
+    grid-area: MainChart;
+    place-self: stretch;
+    height: 100%;
+
+    .Columns {
+        @extend %ColumnNav;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        width: 100%;
+    }
+    .Divider {
+        color: gray;
+        width: 100%;
+    }
+    .Card {
+        position: relative;
+        height: clamp(50vh, 100%, 50vh);
+        padding: 1%;
+        div {
+            .EmptyData {
+                font-weight: bold;
+                align-self: center;
+            }
+        }
+        .ChartContainer {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            .IntervalOptions {
+                @extend %ColumnNav;
+                justify-content: flex-end;
+                width: 100%;
+                .Options {
+                    padding: 0 0.2rem;
+                }
+            }
+
+            .BtnGroup {
+                position: absolute;
+                top: 10%;
+                right: 15px;
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    border-bottom: 1.5px solid white;
+
+                    &.on {
+                        color: lightskyblue !important;
+                        border-color: gray;
+                    }
+                    .ChartToolsIcon {
+                        height: 25px !important;
+                        width: 25px !important;
+                        margin: 30% 0% 0% 0%;
+                    }
+                }
+            }
+
+            #PriceChart {
+                align-self: center;
+                .ohlcDataBox {
+                    font-weight: 600;
+                    font-size: calc(0.75rem + 0.2vw);
+                }
+            }
+        }
+        .Overview {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-around;
+            padding: 1%;
+            .About {
+                padding: 1rem;
+                font-size: calc(0.5rem + 0.4vw);
+
+                h1 {
+                    margin-top: 0;
+                }
+            }
+            .CompanyInfo {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                position: relative;
+                text-align: center;
+                font-size: calc(0.4rem + 0.4vw);
+                .CEO,
+                .HeadQuarter,
+                .Employees {
+                    &::before {
+                        content: attr(text);
+                        display: block;
+                        position: relative;
+                        font-weight: bold;
+                        margin: 1rem;
+                    }
+                }
+            }
+            .EmptyData {
+                font-weight: bold;
+                align-self: center;
+            }
+        }
+
+        .RevenueChart {
+            display: flex;
+            flex-direction: column;
+            .YearOptions {
+                @extend %ColumnNav;
+                justify-content: flex-end;
+                width: 100%;
+                .Options {
+                    padding: 0rem 0.3rem 1rem 0.3rem;
+                }
+            }
+            #RevenueChart {
+                align-self: center;
+            }
+        }
+        .EarningChart {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .Financial {
+            &.Empty {
+                display: flex;
+                flex-direction: column;
+            }
+            .StatementOptions {
+                @extend %ColumnNav;
+                justify-content: flex-start;
+                width: 50%;
+                padding-left: 0;
+                .Options {
+                    padding: 0rem 0.3rem 1rem 0.3rem;
+                }
+            }
+            .YearOptions {
+                @extend %ColumnNav;
+                justify-content: flex-end;
+                width: 50%;
+                .Options {
+                    padding: 0rem 0.3rem 1rem 0.3rem;
+                }
+            }
+            .TableContainer {
+                overflow-y: auto;
+                max-height: 39vh;
+                position: relative;
+                table {
+                    width: 100%;
+                    text-align: center;
+                    padding: 2%;
+                    thead {
+                        width: 100%;
+                        tr {
+                            text-align: center;
+                            th,
+                            .Date {
+                                position: sticky;
+                                top: 0;
+                                background-color: white;
+                                border-bottom: 2px solid black;
+                            }
+                        }
+                    }
+                    tbody {
+                        tr {
+                            text-align: left;
+
+                            .Data {
+                                text-align: center;
+                                padding: 4px;
+                            }
+                            .totalRevenue,
+                            .incomeBeforeTax,
+                            .netIncomeApplicableToCommonShares,
+                            .totalAssets,
+                            .totalLiab,
+                            .totalStockholderEquity,
+                            .totalCashFromOperatingActivities,
+                            .totalCashflowsFromInvestingActivities,
+                            .totalCashFromFinancingActivities,
+                            .netIncome {
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.Contentpage {
+    .NewsCardGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        margin: 2.5%;
+        row-gap: 5%;
+        column-gap: 5%;
+        .NewsCard {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-around;
+            .ThumbnailPic {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    border-radius: 20px;
+                    object-fit: contain;
+                    //width: stretch;
+                    height: 150px;
+                }
+            }
+            .Title {
+                font-size: x-large;
+            }
+            .NewsFooter {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Contentpage {
+        .NewsCardGrid {
+            row-gap: 2.5%;
+        }
+    }
+}

@@ -1,0 +1,225 @@
+%boxShadowAnimation {
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05),
+        0 5px 15px 0 rgba(0, 0, 0, 0.05);
+    transition: ease box-shadow 0.5s;
+    &:hover {
+        box-shadow: 0 15px 60px 0 rgba(0, 0, 0, 0.15),
+            0 5px 25px 0 rgba(0, 0, 0, 0.15);
+    }
+}
+
+%Glassmorphism {
+    border: 1px solid rgba(255, 255, 255, $alpha: 0.75);
+    background: rgba(177, 177, 177, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+.LoginPage {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    overflow-y: hidden;
+
+    user-select: none;
+
+    background-image: url("../../Assets/BG.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .LogoName {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 40%;
+        .Logo {
+            height: 50%;
+            width: 50%;
+        }
+        h1 {
+            font-size: 5rem;
+            font-family: system-ui;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    .Login {
+        position: relative;
+
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(177, 177, 177, 0.15);
+        border-radius: 10px;
+        padding: 8px 24px;
+
+        backdrop-filter: blur(5px);
+
+        z-index: 1;
+
+        @extend %boxShadowAnimation;
+
+        height: 50%;
+        width: clamp(325px, 30%, 500px);
+        perspective: 500px;
+
+        .Form {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            .Face {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+
+                .AccountLogo {
+                    height: 25%;
+
+                    @extend %Glassmorphism;
+
+                    border-radius: 50%;
+                    padding: 8px;
+                }
+                ::placeholder {
+                    color: black;
+                    opacity: 0.95;
+                    text-align: center;
+                }
+                input {
+                    width: 90%;
+                    border-radius: 25px;
+
+                    @extend %boxShadowAnimation;
+                    @extend %Glassmorphism;
+
+                    padding: 16px 24px;
+                    outline: none;
+
+                    font-size: x-large;
+
+                    text-align: center;
+                }
+                .Error {
+                    border: 3px solid red;
+                }
+
+                span {
+                    cursor: pointer;
+                }
+
+                button {
+                    width: 90%;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, $alpha: 0.75);
+                    padding: 16px 24px;
+
+                    @extend %boxShadowAnimation;
+                    cursor: pointer;
+
+                    background: lightblue;
+                    backdrop-filter: blur(5px);
+                }
+                .Ripple {
+                    background-position: center;
+                    transition: background 0.5s;
+                }
+                .Ripple:hover {
+                    background: rgba(lightblue, $alpha: 0.5)
+                        radial-gradient(circle, transparent 1%, lightblue 1%)
+                        center/15000%;
+                }
+                .Ripple:active {
+                    background-color: rgba($color: lightblue, $alpha: 0.5);
+                    background-size: 100%;
+                    transition: background 0s;
+                }
+            }
+            .Front {
+                transform: rotateY(360deg);
+            }
+            .Back {
+                transform: rotateY(180deg);
+            }
+        }
+        .Form.Flipped {
+            transform: rotateY(180deg);
+        }
+    }
+
+    .Footer {
+        margin: auto auto 0.2% auto;
+    }
+}
+
+@media only screen and (max-height: 520px) {
+    .LoginPage {
+        .Snackbar {
+            &.Error {
+                &.Error::before {
+                    height: 12px;
+                    width: 12px;
+                    margin: 4px 6px 4px 0px;
+                    background-size: 12px 12px;
+                }
+            }
+            &.Success {
+                &.Success::before {
+                    height: 12px;
+                    width: 12px;
+                    margin: 4px 6px 4px 0px;
+                    background-size: 12px 12px;
+                }
+            }
+        }
+        .LogoName {
+            height: auto;
+            .Logo {
+                display: none;
+            }
+            .Name {
+                h1 {
+                    font-size: 2rem;
+                    height: auto;
+                    margin: 0 auto;
+                }
+                span {
+                    display: none;
+                }
+            }
+        }
+        .Login {
+            height: 270px;
+            .Form {
+                .Face {
+                    input {
+                        padding: 8px 16px;
+                        font-size: 1rem;
+                    }
+                    span {
+                        font-size: 0.75rem;
+                    }
+                    button {
+                        padding: 8px 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (-webkit-device-pixel-ratio: 2) {
+    .LoginPage {
+        .Login {
+            backdrop-filter: blur(0.1px) !important;
+        }
+    }
+}

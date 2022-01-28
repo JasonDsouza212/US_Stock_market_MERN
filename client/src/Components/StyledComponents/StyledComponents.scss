@@ -1,0 +1,460 @@
+//Styled Components
+
+%SnackLogo {
+    content: "";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin: 8px 12px 8px 0px;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+}
+
+//Divider
+.Divider {
+    border: none;
+    height: 1px;
+    background-color: rgba($color: grey, $alpha: 0.5);
+    width: 80%;
+    align-self: center;
+}
+
+//SidePanel
+.SidePanel {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    background-color: rgba($color: black, $alpha: 0.85);
+    color: rgba(white, 0.5);
+
+    &.Collapsed {
+        max-width: 64px;
+    }
+
+    .Dialog {
+        .Card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            text-align: center;
+            font-weight: bolder;
+            font-size: calc(0.75rem + 0.5vw);
+            width: clamp(200px, 80vw, 400px);
+            .UserName,
+            .JoinDate {
+                color: black;
+                position: relative;
+                width: 50%;
+                &::before {
+                    content: attr(text);
+                    display: block;
+                    position: relative;
+                    color: gray;
+                    border-bottom: 1px solid black;
+                }
+            }
+            button {
+                width: 50%;
+                font-size: calc(0.5rem + 0.5vw);
+                padding: 8px 16px;
+                border: 1px solid black;
+                border-radius: 10px;
+                background-color: red;
+                color: white;
+                position: relative;
+
+                &:hover::before {
+                    content: "👈🏼Irreversible!";
+                    display: block;
+                    position: absolute;
+                    padding: 8px 16px;
+                    bottom: 0;
+                    z-index: 20;
+                    background-color: rgba($color: gray, $alpha: 1);
+                    border-radius: 10px;
+                    right: 0;
+                    transform: translateX(105%);
+                }
+            }
+        }
+    }
+
+    .TitleLogo {
+        font-size: xx-large;
+        font-family: system-ui;
+        font-weight: bold;
+        margin: 20% 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+
+        span.Collapsed {
+            display: none;
+        }
+
+        &::before {
+            content: "";
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            vertical-align: bottom;
+
+            margin: 2px 12px;
+            background-size: 40px 40px;
+            background-repeat: no-repeat;
+            background-image: url("../../Assets/Plutus\ Icon.svg");
+        }
+    }
+    .NavItems {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+
+        padding: 8px 0px;
+        margin: 0;
+
+        .NavItem {
+            padding: 8px 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-items: flex-start;
+            text-align: left;
+            cursor: pointer;
+
+            &:not(:last-child):hover {
+                .NavItemIcon {
+                    fill: lightseagreen;
+                }
+            }
+
+            &.Selected {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    height: 50%;
+                    width: 3px;
+                    border: 1px solid white;
+                    background-color: white;
+                }
+                color: white;
+
+                .NavItemIcon {
+                    fill: white;
+                }
+            }
+
+            &.Collapsed {
+                &:not(:last-child):hover::after {
+                    content: attr(tooltip);
+                    position: fixed;
+                    z-index: 50;
+                    padding: 8px 16px;
+                    border-radius: 15px;
+                    background-color: rgba($color: gray, $alpha: 1);
+                    color: white;
+                    white-space: nowrap;
+                    transform: translateX(50%);
+                }
+                .NavItemText {
+                    display: none;
+                }
+            }
+
+            &:last-child {
+                align-self: flex-end;
+            }
+
+            .NavItemIcon {
+                height: 25px !important;
+                width: 25px !important;
+                margin: 10px 10px 10px 0px;
+                fill: gray;
+            }
+            .NavItemText {
+                line-height: 1.5;
+                font-size: calc(0.5rem + 0.5vw);
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+//SearchInput
+.SearchInput {
+    input {
+        background-image: url("../../Assets/searchquote.svg");
+        background-size: 1.5rem;
+        background-repeat: no-repeat;
+        background-position: 10px;
+        display: block;
+        width: 50%;
+
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        margin: 2% auto;
+        padding: 8px 12px 8px 48px;
+
+        text-transform: uppercase;
+
+        &.Error {
+            outline: 3px solid red;
+        }
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+//Card
+.Card {
+    border-radius: 10px;
+
+    background-color: white;
+    z-index: 1;
+
+    width: 100%;
+    &.H100 {
+        height: 100%;
+    }
+    padding: 24px 24px;
+    margin: auto auto;
+
+    box-shadow: 0 15px 60px rgba($color: black, $alpha: 0.15),
+        0px 5px 25px rgba($color: black, $alpha: 0.15);
+    transition: ease box-shadow 0.5s;
+    &:hover {
+        box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.4),
+            0 5px 25px 0 rgba(0, 0, 0, 0.4);
+    }
+}
+
+//Skeleton
+.Skeleton {
+    position: relative;
+    background-color: #e2e2e2;
+
+    &::after {
+        display: block;
+        position: absolute;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent
+        );
+        content: "";
+        width: 20%;
+        height: 100%;
+
+        transform: translateX(0%);
+        animation: loading 1s infinite;
+    }
+}
+
+@keyframes loading {
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+//Dialog
+.Dialog {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 2;
+    .Card {
+        position: relative;
+        height: 50%;
+        width: 30%;
+
+        margin: auto;
+        padding: 8px 24px;
+    }
+}
+
+//Snackbar
+.Snackbar {
+    visibility: hidden;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+
+    position: fixed;
+    top: 75px;
+    left: calc(85% / 2);
+
+    padding: 2px 16px;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    height: 5%;
+
+    &.Error {
+        background-color: red;
+        &.Error::before {
+            @extend %SnackLogo;
+            background-image: url("../../Assets/error.svg");
+        }
+    }
+    &.Success {
+        background-color: green;
+        &.Success::before {
+            @extend %SnackLogo;
+            background-image: url("../../Assets/success.svg");
+        }
+    }
+}
+
+.Snackbar.Show {
+    visibility: visible;
+    animation: fadeIn 0.5s, fadeOut 0.5s 1.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+    to {
+        top: 75px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        top: 75px;
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 0;
+    }
+}
+
+//Spinner
+.SpinnerContainer {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    h1 {
+        position: absolute;
+    }
+    .Spinner {
+        height: 50vh;
+        width: 50vh;
+        border: 15px solid rgba($color: gray, $alpha: 0.3);
+        border-top: 15px solid lightblue;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+//ReadMore
+.ReadMoreText {
+    span {
+        color: lightseagreen;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Homepage {
+        display: flex;
+        flex-direction: column;
+        .SidePanel {
+            position: fixed;
+            bottom: 0;
+            z-index: 99;
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            max-height: 60px;
+            &.Collapsed {
+                max-width: none;
+            }
+
+            .Dialog {
+                transform: translateY(calc(-50% - 30px));
+            }
+
+            .TitleLogo {
+                display: none;
+            }
+            .NavItems {
+                height: 40px;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                .Divider {
+                    display: none;
+                }
+
+                .NavItem {
+                    padding: 2px 6px;
+                    // &:not(:last-child):hover {
+                    //     .NavItemIcon {
+                    //         fill: gray;
+                    //     }
+                    // }
+
+                    &.Selected {
+                        .NavItemIcon {
+                            fill: white;
+                        }
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            bottom: -25%;
+                            height: 1px;
+                            width: 100%;
+                            background-color: white;
+                        }
+                    }
+                    .NavItemIcon {
+                        height: 25px !important;
+                        width: 25px !important;
+                        margin: 0px;
+                        //vertical-align: middle;
+                        fill: gray;
+                    }
+
+                    .NavItemText {
+                        display: none;
+                    }
+                    &:last-child {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

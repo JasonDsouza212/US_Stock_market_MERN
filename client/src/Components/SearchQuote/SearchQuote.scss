@@ -1,0 +1,486 @@
+%tagBorder {
+    border: 1px solid black;
+    background: white;
+    border-radius: 7.5px;
+    padding: 4px 16px;
+}
+
+%orderLabel {
+    content: attr(name);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+.Contentpage {
+    .SearchQuote {
+        display: grid;
+        margin: 1%;
+        column-gap: 1%;
+        row-gap: 1%;
+
+        grid-template-rows: auto;
+        grid-template-columns: auto 25% 25%;
+        grid-template-areas:
+            "SearchInput KeyData OrderPanel"
+            "StockInfo KeyData OrderPanel"
+            "MainChart MainChart OrderPanel"
+            "MainChart MainChart TransactionHistory"
+            "MainChart MainChart TransactionHistory"
+            "MainChart MainChart TransactionHistory";
+        .SearchInput {
+            input {
+                width: 100%;
+                margin: 0% auto;
+            }
+            grid-area: SearchInput;
+        }
+        .StockInfo {
+            grid-area: StockInfo;
+            place-self: center stretch;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            width: 100%;
+            .Header {
+                display: flex;
+                flex-direction: column;
+                .CompanyName {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    h1 {
+                        font-size: calc(3rem + 0.1vw);
+                        margin: 2% 0%;
+                    }
+                    .webLogo {
+                        height: 30px;
+                        width: 30px;
+                        vertical-align: text-bottom;
+                    }
+                }
+                .SymbolTags {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    h4 {
+                        color: rgba($color: gray, $alpha: 0.7);
+                    }
+                    div {
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        div {
+                            font-size: calc(0.75rem + 0.1vw);
+                            @extend %tagBorder;
+                        }
+                    }
+                }
+            }
+            .Price {
+                &::before {
+                    content: "$";
+                    display: inline;
+                    font-size: calc(2rem + 0.1vw);
+                }
+                font-size: calc(4rem + 0.1vw);
+                margin: 0% 0% 0% 0%;
+                &::after {
+                    content: attr(currency);
+                    display: inline;
+                    font-size: initial;
+                }
+            }
+            .PriceChange {
+                display: flex;
+                align-items: center;
+                position: relative;
+                justify-content: space-between;
+                h2 {
+                    margin: 0% 2%;
+                }
+                h5 {
+                    opacity: 0.5;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .KeyData {
+            grid-area: KeyData;
+            place-self: stretch;
+            .Card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+
+                padding: 5%;
+
+                .Header {
+                    position: relative;
+                    font-weight: bold;
+                    margin: 1% 0px;
+                    font-size: calc(1.25rem + 0.1vw);
+                }
+                .DataTable {
+                    column-count: 2;
+                    text-align: center;
+                    position: relative;
+                    padding: 2.5%;
+                    .DataValue {
+                        padding: 2.5%;
+                        &::before {
+                            content: attr(datalabel);
+                            display: block;
+                            position: relative;
+                            color: gray;
+                            white-space: nowrap;
+                            border-bottom: 1px solid gray;
+                            margin: 1%;
+                            font-size: calc(0.75rem + 0.2vw);
+                        }
+                    }
+                }
+            }
+        }
+
+        .OrderPanel {
+            grid-area: OrderPanel;
+            place-self: stretch;
+            height: 100%;
+
+            .Card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                padding: 5%;
+                height: minmax(100%, 49vh);
+                .OrderInterface {
+                    flex-direction: column;
+                    display: none;
+
+                    &.Show {
+                        display: flex !important;
+                    }
+
+                    .Header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .CardTitle {
+                            font-weight: bold;
+                            margin: 1% 0px;
+                            font-size: calc(1.25rem + 0.1vw);
+                        }
+                        .Type {
+                            color: white;
+                            font-size: calc(1rem + 0.1vw);
+                            font-weight: bold;
+                            padding: 4px 30px;
+                            border-radius: 10px;
+                            &.Buy {
+                                background: green;
+                            }
+                            &.Sell {
+                                background: red;
+                            }
+                        }
+                    }
+
+                    .PositionInfo {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+
+                        .CashBalance,
+                        .Position {
+                            margin: 2.5% 0%;
+                            font-weight: bold;
+                            position: relative;
+                            text-align: end;
+                            &::before {
+                                content: attr(name) ":";
+                                display: inline-block;
+                                position: absolute;
+                                left: 0;
+                                color: gray;
+                            }
+                        }
+                        .ButtonGroup {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            button {
+                                width: 35%;
+                                padding: 12px 0.1rem;
+                                border-radius: 7.5px;
+                                cursor: pointer;
+                                box-shadow: 5px 10px 30px
+                                    rgba($color: black, $alpha: 0.1);
+                                font-size: calc(0.75rem + 0.1vw);
+                            }
+                        }
+                    }
+
+                    .OrderForm {
+                        margin: 3% 0% 0% 0%;
+                        text-align: end;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        position: relative;
+
+                        font-weight: bold;
+                        font-size: calc(1rem + 0.2vw);
+                        .InputContainer {
+                            &::before {
+                                @extend %orderLabel;
+                                color: gray;
+                            }
+                            margin: 1%;
+                            .Shares {
+                                width: 25%;
+                                padding: 4px 8px;
+                            }
+                        }
+                        .MarketPrice {
+                            &::before {
+                                @extend %orderLabel;
+                                color: gray;
+                            }
+                            margin: 1%;
+                        }
+                        .TotalCost {
+                            &::before {
+                                @extend %orderLabel;
+                            }
+                            margin: 1%;
+                        }
+                        .Divider {
+                            width: 100%;
+                            margin: 5% 8px;
+                        }
+                        .OrderButton {
+                            padding: 12px 0px;
+                            border-radius: 10px;
+                            color: white;
+                            background: black;
+                            cursor: pointer;
+                        }
+                        h6 {
+                            text-align: center;
+                            text-decoration: underline;
+                            font-size: 1rem;
+                            margin: 1%;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .TransactionHistory {
+            grid-area: TransactionHistory;
+            place-self: stretch;
+
+            .Card {
+                padding: 5%;
+                height: 48.5vh;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+
+                .Header {
+                    font-weight: bold;
+                    margin: 1% 0px;
+                    font-size: calc(1.25rem + 0.1vw);
+                }
+                .TableContainer {
+                    overflow-y: auto;
+                    overflow-x: auto;
+                    align-self: center;
+                    //width: 95%;
+                    table {
+                        text-align: center;
+                        border-collapse: collapse;
+                        position: relative;
+                        thead {
+                            .Colname {
+                                th {
+                                    position: sticky;
+                                    z-index: 1;
+                                    top: 0;
+                                    border-bottom: 1px solid gray;
+                                    color: gray;
+                                    padding: 0px 12px 8px 12px;
+                                    background-color: white;
+                                    text-decoration: underline;
+                                    // font-size: calc(1rem + 0.1vw);
+                                }
+                            }
+                        }
+                    }
+                    .Row {
+                        td {
+                            border-bottom: 0.1px solid gray;
+                            padding: 8px;
+                            font-size: calc(0.75rem + 0.2vw);
+                        }
+                        .Type {
+                            &::after {
+                                content: attr(date);
+                                display: block;
+                                position: relative;
+                                bottom: 0;
+                                color: gray;
+                                font-weight: bold;
+                            }
+                        }
+                        .Quantity {
+                            &::after {
+                                content: "@" attr(price);
+                                display: block;
+                                position: relative;
+                                bottom: 0;
+                                color: gray;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    .Divider {
+                        width: 100%;
+                    }
+
+                    .EmptyTransaction {
+                        height: clamp(200px, 100%, 200px);
+                        position: relative;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: calc(1.5rem + 0.1vw);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Snackbar {
+        left: 0%;
+        width: 100%;
+    }
+    .Contentpage {
+        .SearchQuote {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .SearchInput {
+                margin-top: 2%;
+                width: 75%;
+                align-self: center;
+            }
+            .StockInfo {
+                width: 95%;
+            }
+            .KeyData {
+                .Card {
+                    width: 95%;
+                    margin: 2.5%;
+                }
+            }
+            .MainChart {
+                height: 50vh;
+                margin: 2.5%;
+                .Columns {
+                    padding: 5% 0;
+                    font-size: 1.2rem;
+                }
+                .Financial {
+                    .YearOptions,
+                    .StatementOptions {
+                        font-size: 0.8rem;
+                    }
+                }
+
+                #PriceChart {
+                    g {
+                        .xAxis {
+                            path,
+                            text,
+                            .tick {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+            .OrderPanel {
+                margin: 20% 2.5% 2.5% 2.5%;
+            }
+            .TransactionHistory {
+                margin: 2.5%;
+                .TableContainer {
+                    margin: 0 auto;
+                    width: 95%;
+                    table {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .Contentpage {
+        .SearchQuote {
+            .StockInfo {
+                .PriceChange {
+                    h5 {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+            .MainChart {
+                .Columns {
+                    padding: 5% 0;
+                    font-size: 0.75rem;
+                }
+                .Financial {
+                    .YearOptions,
+                    .StatementOptions {
+                        font-size: 0.55rem;
+                    }
+                    .TableContainer {
+                        font-size: 0.75rem;
+                    }
+                }
+                .Card {
+                    .ChartContainer {
+                        .BtnGroup {
+                            flex-direction: row;
+                            top: unset;
+                            bottom: 0% !important;
+                            left: calc(50% - 60px);
+                            height: calc(20px * 1.5);
+                            span {
+                                margin: 0% 10px;
+                                .ChartToolsIcon {
+                                    height: 20px !important;
+                                    width: 20px !important;
+                                    margin: 30% 0% 0% 0%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

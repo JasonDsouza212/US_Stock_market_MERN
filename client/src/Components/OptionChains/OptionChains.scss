@@ -1,0 +1,168 @@
+%flexrow {
+    display: flex;
+    flex-direction: row;
+}
+
+.Contentpage {
+    #OptionChainCard {
+        width: 98%;
+        margin: 1%;
+
+        .OptionChainHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .Title {
+                font-weight: bolder;
+                font-size: calc(1.5rem + 0.1vw);
+                margin: 1% 0%;
+            }
+            span {
+                font-size: calc(1rem + 0.2vw);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                select {
+                    padding: 4% 10%;
+                    appearance: none;
+                    outline: none;
+                    font-size: 1rem;
+                }
+            }
+        }
+        .OptionsGrid {
+            width: 100%;
+            margin: 1% 0% 0% 0%;
+            overflow-y: scroll;
+            border-collapse: collapse;
+            .CALLPUT {
+                &.ColSpan3,
+                &.ColSpan4 {
+                    display: none;
+                }
+                font-weight: bolder;
+                font-size: calc(1.25rem + 0.2vw);
+                .Calls,
+                th,
+                .Puts {
+                    position: sticky;
+                    padding: 1% 0%;
+                    top: 0;
+                    background: white;
+                    z-index: 30;
+                }
+            }
+
+            .ColName {
+                th {
+                    text-decoration: underline;
+                    position: sticky;
+                    padding: 1% 0%;
+                    top: calc(2.5rem + 0.4vw);
+                    z-index: 30;
+                    background: white;
+                    border-bottom: 3px solid black;
+                    font-size: 1rem;
+                }
+            }
+
+            .Row {
+                text-align: center;
+                td {
+                    padding: 0.5rem 0em;
+                }
+            }
+            .Row:hover {
+                background-color: rgba($color: #000000, $alpha: 0.3);
+            }
+            .CallInTheMoney {
+                td:nth-child(-n + 7) {
+                    background-color: rgba($color: #ffffe0, $alpha: 0.5);
+                }
+            }
+            .PutInTheMoney {
+                td:nth-child(n + 9):nth-child(n-13) {
+                    background-color: rgba($color: #ffffe0, $alpha: 0.5);
+                }
+            }
+
+            .up {
+                font-weight: bold;
+                color: green;
+            }
+            .down {
+                font-weight: bold;
+                color: red;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .Contentpage {
+        .SearchInput {
+            .Inputarea {
+                width: 75%;
+            }
+        }
+        #OptionChainCard {
+            .OptionsGrid {
+                .CALLPUT {
+                    &.ColSpan7,
+                    &.ColSpan3 {
+                        display: none;
+                    }
+                    &.ColSpan4 {
+                        display: table-row;
+                    }
+                }
+                .ImpliedVolatility,
+                .Bid,
+                .Ask {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .Contentpage {
+        #OptionChainCard {
+            .OptionChainHeader {
+                .Title {
+                    font-size: 0.9rem;
+                }
+                span {
+                    font-size: 0.6rem;
+                    select {
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+            .OptionsGrid {
+                font-size: 0.75rem;
+                .CALLPUT {
+                    &.ColSpan7,
+                    &.ColSpan4 {
+                        display: none;
+                    }
+                    &.ColSpan3 {
+                        display: table-row;
+                    }
+                }
+                .ColName {
+                    th {
+                        font-size: calc(0.65rem + 0.2vw);
+                        top: calc(1.9rem);
+                    }
+                }
+                .OpenInterest {
+                    display: none;
+                }
+            }
+        }
+    }
+}
